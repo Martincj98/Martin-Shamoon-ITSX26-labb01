@@ -17,8 +17,8 @@
 ---
 ## 3. Hardening
 | Kontroll | Risk | Vad gjorde jag? | Hur verifierade jag? | CIA |
-|----------|-----------|-----------|-----------|-----------|
-|whoami | ID och behörighet | En användare kan ha större rättigheter än nödvändigt| Jag körde kommando "whoami", "id" och "groups". Användaren var "martinsh" och tillhörde "martinsh adm cdrom sudo dip plugdev users"  |Jämförde användarens grupper med rättigheterna, administrativa kommandon kördes bara med "sudo". | Konfidentialitet och integritet.
+|-------|-----------|-----------|-----------|-----------|
+|ID och behörighet| En användare kan ha större rättigheter än nödvändigt|Jag körde kommando "whoami", "id" och "groups". Användaren var "martinsh" och tillhörde "martinsh adm cdrom sudo dip plugdev users"  |Jämförde användarens grupper med rättigheterna, administrativa kommandon kördes bara med "sudo". | Konfidentialitet och integritet|
 ---
 ## 4. Recovery-plan
 ### Vad kan gå fel?
