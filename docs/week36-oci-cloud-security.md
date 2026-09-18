@@ -1,30 +1,14 @@
 # Week 36 OCI Cloud Security Lab
 ## 1. Min OCI-miljö/Min lokala Linux-miljö/Min lokala WSL-miljö
 
-                             ....              martinsh@CJ
-              .',:clooo:  .:looooo:.           -----------
-           .;looooooooc  .oooooooooo'          OS: Ubuntu 26.04.1 LTS (Resolute Raccoon) aarch64
-        .;looooool:,''.  :ooooooooooc          Host: Virtual Machine (Hyper-V UEFI Release v4.1)
-       ;looool;.         'oooooooooo,          Kernel: Linux 6.18.33.2-microsoft-standard-WSL2
-      ;clool'             .cooooooc.  ,,       Uptime: 2 mins
-         ...                ......  .:oo,      Packages: 544 (dpkg)
-  .;clol:,.                        .loooo'     Shell: bash 5.3.9
- :ooooooooo,                        'ooool     Display (rdp-0): 1920x1200, 60 Hz
-'ooooooooooo.                        loooo.    WM: WSLg 1.0.73.2 (Wayland)
-'ooooooooool                         coooo.    Theme: Yaru [GTK3]
- ,loooooooc.                        .loooo.    Icons: Yaru [GTK3]
-   .,;;;'.                          ;ooooc     Terminal: xterm-256color
-       ...                         ,ooool.     CPU: Oryon 1*8 (8)
-    .cooooc.              ..',,'.  .cooo.      GPU: Qualcomm(R) Adreno(TM) X1-45 GPU (128.00 MiB) [Integrated]
-      ;ooooo:.           ;oooooooc.  :l.       Memory: 607.57 MiB / 15.37 GiB (4%)
-       .coooooc,..      coooooooooo.           Swap: 0 B / 4.00 GiB (0%)
-         .:ooooooolc:. .ooooooooooo'           Disk (/): 2.64 GiB / 1006.85 GiB (0%) - ext4
-           .':loooooo;  ,oooooooooc            Disk (/mnt/c): 180.89 GiB / 951.37 GiB (19%) - 9p
-               ..';::c'  .;loooo:'             Local IP (eth0): 172.30.221.200/20
-                                               Battery (Microsoft Hyper-V Virtual Battery): 69% [Discharging]
-                                               Locale: C.UTF-8
+
+![images](Images/fastfetch.png) 
   
-- VM-namn/hostnamn/WSL-maskinnamn: 
+  
+  
+  
+  
+- VM-namn/hostnamn/WSL-maskinnamn: martinsh
 - Operativsystem: Ubuntu 26.04.01 
 - Shape (Hårdvara, gäller alla): 
 - Inloggningsmetod: SSH
@@ -108,7 +92,7 @@ Behålls enligt läraren
 ### Publika IP-adresser
 Behålls enligt läraren
 ### GitHub-evidens
-Behålls enligt läraren. Finns på rätt plats 
+Behålls enligt läraren. Finns på rätt plats https://github.com/Martincj98/Martin-Shamoon-ITSX26-labb01.git
 ---
 ## 7. CIA-reflektion
 ### Konfidentialitet
