@@ -7,11 +7,9 @@
   
   
   
-  
 - VM-namn/hostnamn/WSL-maskinnamn: martinsh
 - Operativsystem: Ubuntu 26.04.01 
-- Shape (Hårdvara, gäller alla): 
-- Inloggningsmetod: SSH
+- Inloggningsmetod: SSH 
 ---
 ## 2. Linux-kommandon
 | Kommando | Vad visar det? | CIA-koppling |
@@ -70,11 +68,15 @@ ifall allt jag gjort inte fungerar så ber jag läraren om hjälp genom en annan
 
 Allt jag har dokumenterat i VS code finns  i Github under namnet "docs/week36-oci-cloud-security.md"
 
+wsl --export ubuntu week36backup.tar
+
 ### Vad finns i GitHub?
 
 Allt ovan och allt denna fil innehåller 
 
 ### Vad kan återskapas?
+
+wsl --import ubuntu C:\WSL\ubuntu C:\backup\week36backup.tar
 
 Miljön, kommandon och kontroller. 
 
@@ -108,4 +110,4 @@ Hjälpen jag fick av mina klasskamrater
 ### Vad var svårt?
 Hela uppgiften, eftersom jag inte har någon erfarenhet av detta tidigare.
 ### Vad lärde jag mig?
-Mycket mer än vad jag trodde. 
+Mycket mer än vad jag trodde. Hur man navigerar sig i olika program. Vad kommandon är. 
