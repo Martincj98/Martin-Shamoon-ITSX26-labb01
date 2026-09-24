@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# set -euo pipefail 
 
 # ============================================
 # Secure network check – DNS + portkontroll
@@ -23,6 +23,15 @@ log() {
 
 log INFO "Kontroll startad"
 log INFO "Mål domän: $TARGET_DOMAIN, mål host: $TARGET_HOST, port: $TARGET_PORT"
+
+# Miljö översikt
+env_status(){
+    device_interface=$(ip route | awk 'NR==1{print $5}')
+    ip_address=$(ip -br a | grep "$device_interface" | awk '{print $3}')
+    log INFO "Device Interface: $device_interface"
+    log INFO "IP-adress: $ip_address"
+}
+
 
 # ==========================
 # DNS‑kontroll
