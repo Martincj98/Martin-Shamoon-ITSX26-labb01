@@ -27,3 +27,14 @@ fi
 
 log INFO "Kontroll avslutad, $SUCCESS av $ACTIONS lyckade calls"
 
+2026-09-24T08:47:33+02:00 [INFO] Kontroll startad
+2026-09-24T08:47:33+02:00 [INFO] Mål domän: example.com, mål host: 127.0.0.1, port: 8080
+
+2026-09-24T08:47:33+02:00 [OK] DNS fungerar för example.com 
+
+2026-09-24T08:47:33+02:00 [WARN] Port 8080 på 127.0.0.1 svarar inte 
+
+2026-09-24T08:47:33+02:00 [OK] Port 8080 finns i listan över lyssnande sockets 
+
+2026-09-24T08:47:33+02:00 [INFO] Kontroll avslutad, 2 av 3 lyckade kontroller
+2026-09-24T08:47:33+02:00 [WARN] Resultat: En eller flera kontroller misslyckades. 
