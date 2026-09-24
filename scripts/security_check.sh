@@ -44,3 +44,6 @@ if [[ "$FAIL" -ne 0 ]]; then
 fi
 
 echo "== Result: Basic checks passed =="
+
+
+
