@@ -15,8 +15,8 @@ Ubuntu 26.04 körs i en Docker-container och delar kernel med värdmaskinen.
 - Redovisa relevanta nätverksinterface utan att publicera känsliga uppgifter.
 
 $ ip -br a
-lo           UNKNOWN        127.0.0.1/8 ::1/128
-eth0@if6     UP             172.17.0.2/16
+lo               UNKNOWN        127.0.0.1/8 10.255.255.254/32 ::1/128
+eth0             UP             172.30.221.200/20 fe80::215:5dff:fe31:10f4/64
 Det finns två nätverksinterface: loopback och ett Ethernet-interface som används av containern.
 
 - Förklara skillnaden mellan lokal adress, privat adress och publik adress där det är relevant.
@@ -25,6 +25,13 @@ En lokal adress (loopback) används för intern kommunikation i samma maskin.
 En privat adress tilldelas inom det lokala nätverket, exempelvis av router eller Docker.
 En publik adress är den externa adress som används för kommunikation med internet.
 All trafik från privata adresser passerar routern innan den når externa mål.
+
+- Beskriv vilka begränsningar din miljö innebär för uppgiften och vilka skillnader du observerar jämfört med
+lärardemonstrationen i OCI. Skillnader är förväntade och påverkar inte bedömningen när du förklarar dem korrekt.
+
+Nätverksmiljön är isolerad i Docker. I OCI körs systemen direkt på en virtuell maskin med full åtkomst till nätverket.
+I min miljö körs Ubuntu i en container som använder ett eget virtuellt nätverk. 
+
 
 # Del B - Manuella Observation
 
