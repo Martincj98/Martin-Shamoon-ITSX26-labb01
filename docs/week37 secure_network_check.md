@@ -29,10 +29,15 @@ All trafik från privata adresser passerar routern innan den når externa mål.
 # Del B - Manuella Observation
 
 | ip adress, hostname -I     | Ser två interface och IPv4                     |
+
 | ip route                   | default route visas                             |
+
 | getent hosts               | Domännamn kan översättas till IP-adress         |
+
 | ss -tuln                   | Port 631 är öppen, används för nätverksutskrifter |
+
 | curl 127.0.0.1:8080        | Ingen anslutning till porten                    |
+
 | ps                         | Visar aktiva processer, bland annat bash och ps |
 
 # Del C - Bygg Bash Verktyg
