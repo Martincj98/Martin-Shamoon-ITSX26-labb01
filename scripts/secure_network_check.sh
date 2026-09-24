@@ -10,6 +10,12 @@ TARGET_DOMAIN="example.com"
 TARGET_HOST="127.0.0.1"
 TARGET_PORT="8080"
 
+# Kontroll av tomma värden
+if [[ -z "$TARGET_DOMAIN" || -z "$TARGET_HOST" || -z "$TARGET_PORT" ]]; then
+    log FAIL "En eller flera variabler saknas – avbryter."
+    exit 1
+fi
+
 # Räknare för resultat
 SUCCESS=0
 ACTIONS=0
@@ -36,12 +42,19 @@ env_status(){
 # ==========================
 # DNS‑kontroll
 # ==========================
+
+# Loop över kontroller
+checks=("DNS" "PORT" "SS")
+for check in "${checks[@]}"; do
+    log INFO "Startar kontroll: $check"
+done
+
 ACTIONS=$((ACTIONS + 1))
 if getent hosts "$TARGET_DOMAIN" >/dev/null 2>&1; then
-    log OK "DNS fungerar för $TARGET_DOMAIN (namn kan översättas)"
+    log OK "DNS fungerar för $TARGET_DOMAIN 
     SUCCESS=$((SUCCESS + 1))
 else
-    log ERROR "DNS fungerar inte för $TARGET_DOMAIN (namn kan inte översättas)"
+    log ERROR "DNS fungerar inte för $TARGET_DOMAIN 
 fi
 
 # ==========================
