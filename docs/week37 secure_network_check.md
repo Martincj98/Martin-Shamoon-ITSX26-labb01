@@ -2,15 +2,15 @@
 
 - Ange om du använder Oracle Cloud, WSL eller Linux på PC.
 
-Jag använder Docker med Ubuntu som operativsystem på en Linux-baserad dator.
-Docker används för att isolera miljön och undvika konflikter med Git.
+Jag använder WSL med Ubuntu som operativsystem på en Linux-baserad dator.
+WSL används för att isolera miljön och undvika konflikter med Git.
 
 - Beskriv operativsystem/distribution på en rimlig nivå.
 
 Ett operativsystem är mjukvara som kommunicerar direkt med hårdvaran och styr hur resurser fördelas.
 $ uname -r
 7.2.6-arch2-1
-Ubuntu 26.04 körs i en Docker-container och delar kernel med värdmaskinen.
+Ubuntu 26.04 körs i en WSL-container och delar kernel med värdmaskinen.
 
 - Redovisa relevanta nätverksinterface utan att publicera känsliga uppgifter.
 
@@ -22,14 +22,14 @@ Det finns två nätverksinterface: loopback och ett Ethernet-interface som anvä
 - Förklara skillnaden mellan lokal adress, privat adress och publik adress där det är relevant.
 
 En lokal adress (loopback) används för intern kommunikation i samma maskin.
-En privat adress tilldelas inom det lokala nätverket, exempelvis av router eller Docker.
+En privat adress tilldelas inom det lokala nätverket, exempelvis av router eller WSL.
 En publik adress är den externa adress som används för kommunikation med internet.
 All trafik från privata adresser passerar routern innan den når externa mål.
 
 - Beskriv vilka begränsningar din miljö innebär för uppgiften och vilka skillnader du observerar jämfört med
 lärardemonstrationen i OCI. Skillnader är förväntade och påverkar inte bedömningen när du förklarar dem korrekt.
 
-Nätverksmiljön är isolerad i Docker. I OCI körs systemen direkt på en virtuell maskin med full åtkomst till nätverket.
+Nätverksmiljön är isolerad i WSL. I OCI körs systemen direkt på en virtuell maskin med full åtkomst till nätverket.
 I min miljö körs Ubuntu i en container som använder ett eget virtuellt nätverk. 
 
 
@@ -51,7 +51,7 @@ I min miljö körs Ubuntu i en container som använder ett eget virtuellt nätve
 Scriptet finns under /scripts/secure_network_check.sh
 
 # Del D - Testning
-Loggar och evidens finns under /agent prompts/evidence-agent.md
+Loggar och evidens finns under /agent prompts/evidence-agent.md (Startar Python server utanför script)
 
 # Del E - CIA-analys
 
@@ -75,7 +75,7 @@ DNS‑kontrollen gav mest värde eftersom den direkt visar om namntjänsten fung
 
 2. Vilken miljöskillnad påverkade ditt arbete?
 
-Att köra verktyget i en containeriserad miljö påverkade arbetet mest. Docker använder ett eget virtuellt nätverk, vilket innebär att IP‑adresser och routing skiljer sig från värdmaskinen. Det gjorde att vissa kommandon gav andra resultat än om de körts direkt på host‑systemet.
+Att köra verktyget i en containeriserad miljö påverkade arbetet mest. WSL använder ett eget virtuellt nätverk, vilket innebär att IP‑adresser och routing skiljer sig från värdmaskinen. Det gjorde att vissa kommandon gav andra resultat än om de körts direkt på host‑systemet.
 
 3. Vilket fel var svårast att tolka?
 
