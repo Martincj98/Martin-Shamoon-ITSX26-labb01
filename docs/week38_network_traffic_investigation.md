@@ -1,5 +1,6 @@
 # Network Traffic Investigation – ITSX26 vecka 38
 
+- **Fil:** week38_packet_journey_basic 
 - **Spår:** Reservspår 
 - **SHA-256:** `9042a0fd0190305c0b68a4126837a240d331c446d0894cb94303849d20d9540e`
 - **Miljö:** WSL 2 med Ubuntu
@@ -8,6 +9,8 @@
 ---
 
 ## Del A – Miljö och metod
+
+Fångstens omfattning: Reserv-pcapen innehåller 34 paket och omfattar cirka 1,65 sekunder.
 
 Jag använder WSL 2 med Ubuntu på min Windows-dator.
 
@@ -43,7 +46,7 @@ Program på klienten
 
 - **Lokal IP:** Klienten har `192.0.2.10` (syns i pcap).
 - **DNS:** Klienten frågar efter `training.example` och får svaret `198.51.100.50` (syns i pcap, pkt 1–2).
-- **Default route/gateway:** Alla paket går till samma MAC-adress (`02:00:00:00:00:01`). Det är troligen gatewayen (min tolkning). Routingtabellen syns inte i pcapen.
+- **Default route/gateway:** Alla paket går till samma MAC-adress (`02:00:00:00:00:01`).
 - **Privat/publik adress:** Båda adresserna är testadresser. I övningen fungerar `192.0.2.10` som den interna klienten och `198.51.100.50` som den externa servern.
 - **Brandvägg:** Klientens utgående regler, routern och serverns inkommande regler kan alla stoppa trafiken. Här gick allt igenom, och det finns inga RST eller felmeddelanden.
 - **Transport:** TCP från port 41000 till port 80 (syns i pcap).
@@ -80,8 +83,8 @@ Program på klienten
 
 - **Förväntat:** Handskakning, förfrågan, svar och sedan stängning.
 - **Observerat:** Allt ser normalt ut. Sekvens- och ACK-nummer stämmer.
-- **Avvikelser:** Inga (inga RST, timeouts eller omsändningar).
-- **Alternativ förklaring:** Tiden mellan alla paket är exakt 50 ms, vilket är ovanligt i riktig trafik. Filen är nog skapad för övning.
+- **Avvikelser:** Inga avvikelser.
+- **Alternativ förklaring:** Tiden mellan alla paket är exakt 50 ms, vilket är ovanligt i riktig trafik.
 - **Behövs för säkrare slutsats:** Serverns logg och en fångst på serversidan.
 
 ### Flöde 2: TLS (pkt 19–32)
@@ -135,10 +138,10 @@ Jag väljer HTTP-flödet (pkt 9–18). Klienten behöver en **utgående** regel 
 
 | | |
 |---|---|
-| **Konfidentialitet** | Pcapen kan innehålla känsliga saker, till exempel HTTP i klartext (pkt 12–14). Därför ligger den bara lokalt. Med TLS döljs innehållet, men metadata syns. |
-| **Integritet** | Jag visar att analysen hör till rätt fil med filnamnet, SHA-256-hashen och paketnumren. Git-historiken visar när rapporten ändrats. |
+| **Konfidentialitet** | Pcapen kan innehålla känsliga saker, till exempel HTTP i klartext (pkt 12–14). Därför ligger den bara lokalt. Med TLS döljs innehållet. |
+| **Integritet** | Jag visar att analysen hör till rätt fil med filnamnet, SHA-256-hashen och paketnumren. |
 | **Tillgänglighet** | DNS svarar (pkt 2), ping svarar (pkt 4, 6, 8), TCP-anslutningarna fungerar och HTTP ger `200 OK`. Allt fungerar under de 1,65 sekunderna. |
-| **Evidenskvalitet** | Fångsten är väldigt kort och tagen bara från klientens sida, så NAT och brandvägg syns inte. Certifikat saknas. TLS-delen verkar konstgjord. Jag har inte fångat filen själv. |
+| **Evidenskvalitet** | Fångsten är väldigt kort och tagen bara från klientens sida, så NAT och brandvägg syns inte. Certifikat saknas.|
 
 ---
 
@@ -150,8 +153,12 @@ Jag väljer HTTP-flödet (pkt 9–18). Klienten behöver en **utgående** regel 
 
 **Osäkert:** Vägen via router, NAT och brandvägg är min tolkning. TLS-flödet följer inte riktig TLS, så jag drar inga slutsatser om krypteringen.
 
-**Rekommendation:** Använd HTTPS i stället för HTTP, eftersom pcapen visar att HTTP går att läsa helt. Behåll default deny för inkommande trafik på klienten. Pcapen visar ingen attack.
+**Rekommendation:** Använd HTTPS i stället för HTTP, eftersom pcapen visar att HTTP går att läsa helt. 
 
 **Nästa steg:** Göra en egen kort fångst av riktig HTTPS-trafik och titta på brandväggsloggar och serverloggar.
+
+## AI-användning 
+
+Jag använde AI som stöd för stavfel och layout för dokumentet. Jag kontrollerade ifall jag missade någon del i uppgiften genom AI. AI användes också för grammatiska förslag och ändringar. 
 
 ---
