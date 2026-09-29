@@ -93,3 +93,5 @@ else
     echo "== Resultat: Granskning krävs =="
     exit 1
 fi
+
+
