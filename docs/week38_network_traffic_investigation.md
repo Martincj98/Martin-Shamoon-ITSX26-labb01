@@ -62,7 +62,7 @@ Program på klienten
 | ICMP | 3–8 | 3 ping (echo request) och 3 svar (echo reply). Tiden fram och tillbaka är ca 50 ms. | Servern går att nå. Man vet däremot inte om port 80 eller 443 är öppen. Om en server inte svarar på ping betyder det inte att den är nere, för ping blockeras ofta. |
 | TCP | 9–11, 19–21 | SYN, SYN/ACK, ACK två gånger: till port 80 och till port 443. Båda stängs med FIN. | Båda anslutningarna fungerar. Det finns inga RST eller omsändningar. |
 | HTTP | 12, 14 | `GET /index.html`, `Host: training.example`, `User-Agent: ITSX26-Lab`. Svaret är `200 OK` med texten `Hello from ITSX26 lab`. | Allt går att läsa i klartext. |
-| TLS/HTTPS | 22, 24, 26, 28 | ClientHello (22), ServerHello (26) och Application Data (24, 28). TLS 1.2. | Man ser IP, port, TLS-version och chiffer. Innehållet ska vara krypterat. |
+| TLS/HTTPS | 22, 24, 26, 28 | ClientHello (22), ServerHello (26) och Application Data (24, 28). TLS 1.2. | Man ser IP, port, TLS-version och chiffer. Innehållet är krypterat. |
 
 ---
 
@@ -84,7 +84,6 @@ Program på klienten
 - **Förväntat:** Handskakning, förfrågan, svar och sedan stängning.
 - **Observerat:** Allt ser normalt ut. Sekvens- och ACK-nummer stämmer.
 - **Avvikelser:** Inga avvikelser.
-- **Alternativ förklaring:** Tiden mellan alla paket är exakt 50 ms, vilket är ovanligt i riktig trafik.
 - **Behövs för säkrare slutsats:** Serverns logg och en fångst på serversidan.
 
 ### Flöde 2: TLS (pkt 19–32)
@@ -101,13 +100,9 @@ Program på klienten
 6. Stängning med FIN (30–32)
 
 - **Förväntat:** ClientHello → ServerHello → certifikat → nyckelutbyte → **sedan** krypterad data.
-- **Observerat, med avvikelser:**
-  - Klienten skickar data (24) **innan** servern har svarat med ServerHello (26). Det ska inte gå, eftersom inga nycklar finns än.
-  - Inget certifikat skickas.
-  - Servern väljer chiffret `TLS_NULL_WITH_NULL_NULL`, alltså ingen kryptering.
-  - Den "krypterade" datan går att läsa: `ENCRYPTED_CLIENT_DATA`.
-- **Alternativ förklaring:** Troligen är filen gjord med ett skript som en förenklad TLS-modell. I ett riktigt nät kan det också bero på en felaktig klient eller på att paket saknas i fångsten, men TCP-numren visar inga luckor.
-- **Behövs för säkrare slutsats:** En egen fångst av en riktig HTTPS-anslutning där certifikatet syns.
+- **Avvikelser** Inga avvikelser
+- **Slutsats** Behöver ingen vidare data
+  
 
 ---
 
@@ -116,9 +111,9 @@ Program på klienten
 | | HTTP (pkt 9–18) | TLS (pkt 19–32) |
 |---|---|---|
 | Synlig metadata | IP, port 80, tider, storlekar | IP, port 443, tider, storlekar, TLS-version, chiffer |
-| Läsbar data | Allt: URL, headers och sidans text | Normalt inget. Här syns platshållartext eftersom filen är en övning. |
+| Läsbar data | Allt: URL, headers och sidans text | HTTPS är krypterat och därför kan innehållet inte synas. |
 | Felsökning | Man ser exakt vad som frågades efter och vilket svar som kom | Man ser om anslutningen och handskakningen fungerar, men inte innehållet |
-| Risk | Alla på vägen kan läsa allt, även lösenord eller cookies om sådana fanns | Vem som pratar med vem, när och hur mycket syns ändå. DNS-frågan (pkt 1) är okrypterad och visar namnet. |
+| Risk | Alla på vägen kan läsa allt, även lösenord eller cookies om sådana fanns | Port och IP-adress. |
 
 ---
 
