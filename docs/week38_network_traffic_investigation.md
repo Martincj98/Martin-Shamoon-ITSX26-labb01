@@ -54,10 +54,6 @@ Program på klienten
 
 ## Min Nätverksförklaring
 
-Min nätverksförklaring
-
-Här är min uppfattning kring hur datatrafiken rör sig från klienten till servern:
-
 1. DNS: Programvaran känner endast till namnet `training. example` och behöver därför en IP-adress. Klienten kontaktar DNS-servern på 192.0.2.53 och får tillbaka svaret 198.51.100.50 (det framgår i pcap, pkt 1–2).
 2. Första steget, gateway: Klienten inser att 198.51.100.50 inte tillhör dess egna nätverk. Därför dirigeras paketet till standardgatewayen, som är routern. Alla paket adresseras till samma MAC-adress (`02:00:00:00:00:01`), vilket sannolikt indikerar routern 
 3. Brandvägg och NAT: Innan paketet lämnar kan både klientens och routerns brandväggar blockera det. Om klienten haft en privat IP-adress skulle routern ha ersatt den med sin publika IP (NAT/PAT). Detta syns inte i pcap-filen. 
