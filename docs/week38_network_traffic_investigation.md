@@ -52,6 +52,22 @@ Program på klienten
 - **Transport:** TCP från port 41000 till port 80 (syns i pcap).
 - **Applikation:** HTTP, `GET /index.html` (syns i pcap).
 
+## Min Nätverksförklaring
+
+Min nätverksförklaring
+
+Här är min uppfattning kring hur datatrafiken rör sig från klienten till servern:
+
+1. DNS: Programvaran känner endast till namnet `training. example` och behöver därför en IP-adress. Klienten kontaktar DNS-servern på 192.0.2.53 och får tillbaka svaret 198.51.100.50 (det framgår i pcap, pkt 1–2).
+2. Första steget, gateway: Klienten inser att 198.51.100.50 inte tillhör dess egna nätverk. Därför dirigeras paketet till standardgatewayen, som är routern. Alla paket adresseras till samma MAC-adress (`02:00:00:00:00:01`), vilket sannolikt indikerar routern 
+3. Brandvägg och NAT: Innan paketet lämnar kan både klientens och routerns brandväggar blockera det. Om klienten haft en privat IP-adress skulle routern ha ersatt den med sin publika IP (NAT/PAT). Detta syns inte i pcap-filen. 
+4. Hopp över nätverket: Routern vidarebefordrar paketet till den följande routern, och processen fortsätter tills det når serverns nätverk.
+5. Måldestination: Servern på 198.51.100.50 tar emot paketet på TCP port 80, under förutsättning att dess brandvägg tillåter det. Därefter genomförs handskakningen och HTTP-förfrågan får svaret `200 OK` (visas i pcap, pkt 9–14).
+6. Tillbaka: Svaret följer samma väg tillbaka. Klientens brandvägg tillåter det eftersom den minns att klienten initierade anslutningen 
+
+
+
+
 ---
 
 ## Del C – Protokollinventering
@@ -123,7 +139,7 @@ Jag väljer HTTP-flödet (pkt 9–18). Klienten behöver en **utgående** regel 
 
 **Lyssnar vs. tillåts:** Att en tjänst lyssnar på en port (syns med `ss -tulpn`) betyder att den väntar på trafik. Brandväggen bestämmer om trafiken får komma fram. Båda måste stämma för att det ska fungera.
 
-**Default deny:** All inkommande trafik blockeras, och man öppnar bara det som behövs. I pcapen startar klienten alla anslutningar själv, så den behöver inga öppna inkommande portar.
+**Default deny:** All inkommande trafik blockeras, och man öppnar bara det som behövs.
 
 **Hardening:** Flödena (DNS, ping, HTTP och HTTPS ut från klienten) är rimliga för en vanlig klient. Det som inte är bra är HTTP i klartext. Det borde vara HTTPS i stället.
 
@@ -133,7 +149,7 @@ Jag väljer HTTP-flödet (pkt 9–18). Klienten behöver en **utgående** regel 
 
 | | |
 |---|---|
-| **Konfidentialitet** | Pcapen kan innehålla känsliga saker, till exempel HTTP i klartext (pkt 12–14). Därför ligger den bara lokalt. Med TLS döljs innehållet. |
+| **Konfidentialitet** | Pcapen kan innehålla känsliga saker, till exempel HTTP i klartext (pkt 12–14). Med TLS/HTTPS döljs innehållet. |
 | **Integritet** | Jag visar att analysen hör till rätt fil med filnamnet, SHA-256-hashen och paketnumren. |
 | **Tillgänglighet** | DNS svarar (pkt 2), ping svarar (pkt 4, 6, 8), TCP-anslutningarna fungerar och HTTP ger `200 OK`. Allt fungerar under de 1,65 sekunderna. |
 | **Evidenskvalitet** | Fångsten är väldigt kort och tagen bara från klientens sida, så NAT och brandvägg syns inte. Certifikat saknas.|
@@ -146,7 +162,7 @@ Jag väljer HTTP-flödet (pkt 9–18). Klienten behöver en **utgående** regel 
 
 **Säkrast:** DNS, ping, TCP-handskakningarna och HTTP-innehållet, eftersom de syns direkt i paketen.
 
-**Osäkert:** Vägen via router, NAT och brandvägg är min tolkning. TLS-flödet följer inte riktig TLS, så jag drar inga slutsatser om krypteringen.
+**Osäkert:** Vägen via router, NAT och brandvägg är min tolkning. 
 
 **Rekommendation:** Använd HTTPS i stället för HTTP, eftersom pcapen visar att HTTP går att läsa helt. 
 
