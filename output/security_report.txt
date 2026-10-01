@@ -1,0 +1,27 @@
+==================================================
+ITSX26 SECURITY REPORT
+==================================================
+Datakällor: auth.log, access.log, firewall.log, suspicious_ips.txt (katalog: data)
+
+Misslyckade inloggningar: 4
+Unika IP med misslyckad inloggning: 2
+  203.0.113.15: 3
+  198.51.100.44: 1
+
+Indikatorer i listan: 3
+IOC-träffar (unika IP): 3
+  198.51.100.44: access.log 1, auth.log 1
+  203.0.113.15: access.log 2, auth.log 3, firewall.log 1
+  203.0.113.99: firewall.log 1
+
+Hoppade rader (formatfel): 1
+  auth.log rad 6: saknar src= -> 'Malformed line without source'
+
+OBSERVATION
+  203.0.113.15 har flest misslyckade inloggningar (3) och finns i indikatorlistan.
+
+BEGRÄNSNING
+  En IOC-träff eller många misslyckade inloggningar bevisar inte en attack.
+  Det är okänt hur aktuell indikatorlistan är, och datasetet är litet.
+  Hoppade rader ingår inte i antalen.
+==================================================

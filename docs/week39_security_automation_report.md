@@ -28,7 +28,7 @@ Pythonprogrammet src/security_report.py ser till att läsa av loggarna för varj
 auth.log rad 6: saknar src= -> "Malformed line without source"
 
 - Observation
-203.0.113.115 har flest misslyckade inloggningar (3 gånger) och finns i indikatorlistan
+203.0.113.15 har flest misslyckade inloggningar (3 gånger) och finns i indikatorlistan
 
 - Begränsning
 Många misslyckade inloggningar eller en IOC-träff bevisar inte en attack. Det är oklart hur den aktuella indikatorlistan är, och datasetet är litet. Dem hoppade raderna ingår inte i antalen. 
