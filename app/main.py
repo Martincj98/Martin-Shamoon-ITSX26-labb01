@@ -24,7 +24,10 @@ if __name__ == "__main__":
 print("Hej ITSX26!")
 print("Jag studerar IT- och cybersäkerhet.")
 
+def main()
 namn = input("Vad heter du? ")
 print(f"Välkommen , {namn}!")
 
 input("Tryck Enter för att avsluta...")
+
+if __name__ == "__main__":main()
