@@ -18,16 +18,13 @@ def build_status_message(service_name: str = "secure-delivery-playground") -> di
     }
 
 
+def main():
+    print("Hej ITSX26!")
+    print("Jag studerar IT- och cybersäkerhet.")
+    namn = input("Vad heter du? ")
+    print(f"Välkommen, {namn}!")
+    input("Tryck Enter för att avsluta...")
+
+
 if __name__ == "__main__":
-    print(build_status_message())
-
-print("Hej ITSX26!")
-print("Jag studerar IT- och cybersäkerhet.")
-
-def main()
-namn = input("Vad heter du? ")
-print(f"Välkommen , {namn}!")
-
-input("Tryck Enter för att avsluta...")
-
-if __name__ == "__main__":main()
+    main()
